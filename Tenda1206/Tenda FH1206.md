@@ -6,7 +6,7 @@
 
 **Vulnerability Location:** formexeCommand function in /bin/httpd
 
-![image-20240806153011152](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20240806153011152.png)
+![img1](img\img1.png)
 
 The vulnerability is caused by the fact that the array size of v7 is fixed when defining the variable in line 9, while the src parameter is entered by the user in line 19, and the length validation of the src parameter is not done when copying src to v7 using the strcpy function in line 20.
 
@@ -20,21 +20,19 @@ https://www.tendacn.com/hk/download/detail-2344.html
 
 Unpacked directory:
 
-![image-20240806153106625](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20240806153106625.png)
-
- 
+![img2](img\img2.png)
 
 2. Use IDA Pro to open the unpacked file: bin/httpd, Ctrl+f on the left to search for the main function, find and enter the main function, press f5 to disassemble.
 
-![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png)
+![img3](img\img3.png)
 
 3. Patch check_network(v7) on line 15 of the main function, remove the while loop (this step is to prepare for qemu emulation to run the firmware later), and the result after the patch is shown below:
 
-![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image003.png)
+![img4](img\img4.png)
 
 The corresponding assembly code is as follows:
 
-![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image004.png)
+![img5](img\img5.png)
 
 4. Create a virtual NIC br0 in ubuntu, the IP address can be the current same network segment, my network segment here is 192.168.153.0/24, so I set br0 ip to 192.168.153.100:
 
@@ -44,7 +42,7 @@ sudo ifconfig br0 192.168.153.100/24
 
 Use the ifconfig command after successful setup to see the following display:
 
-![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image006.png)
+![img6](img\img6.png)
 
 5. Run httpd using qemu:
 
@@ -52,12 +50,12 @@ sudo cp $(which qemu-mipsel-static) .
 
 sudo chroot . ./qemu-mipsel-static ./bin/httpd
 
-![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image008.png)
+![img7](img\img7.png)
 
 6. Construct the POC as follows and save it as poc.py:
 
-![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image010.png)
+![img8](img\img8.png)
 
 7. Running POC in another terminal: python3 poc.py triggers a denial of service:
 
-![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image012.png)
+![img9](img\img9.png)
