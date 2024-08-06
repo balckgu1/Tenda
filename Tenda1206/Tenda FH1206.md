@@ -6,7 +6,7 @@
 
 **Vulnerability Location:** formexeCommand function in /bin/httpd
 
-![img1](img\img1.png)
+![img1](./img/img1.png)
 
 The vulnerability is caused by the fact that the array size of v7 is fixed when defining the variable in line 9, while the src parameter is entered by the user in line 19, and the length validation of the src parameter is not done when copying src to v7 using the strcpy function in line 20.
 
