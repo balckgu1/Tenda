@@ -1,0 +1,1 @@
+The `poc1203.zip` contains the POC to validate the vulnerability, and the `Tenda FH1203.md` contains the vulnerability details and the reproduction process
