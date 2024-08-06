@@ -24,11 +24,11 @@ Unpacked directory:
 
 2. Use IDA Pro to open the unpacked file: bin/httpd, Ctrl+f on the left to search for the main function, find and enter the main function, press f5 to disassemble.
 
-![img3](.\img\img3.png)
+![img3](./img/img3.png)
 
 3. Patch check_network(v7) on line 15 of the main function, remove the while loop (this step is to prepare for qemu emulation to run the firmware later), and the result after the patch is shown below:
 
-![img4](img\img4.png)
+![img4](img/img4.png)
 
 The corresponding assembly code is as follows:
 
