@@ -32,7 +32,7 @@ Unpacked directory:
 
 The corresponding assembly code is as follows:
 
-![img5](img\img5.png)
+![img5](img/img5.png)
 
 4. Create a virtual NIC br0 in ubuntu, the IP address can be the current same network segment, my network segment here is 192.168.153.0/24, so I set br0 ip to 192.168.153.100:
 
@@ -42,7 +42,7 @@ sudo ifconfig br0 192.168.153.100/24
 
 Use the ifconfig command after successful setup to see the following display:
 
-![img6](img\img6.png)
+![img6](img/img6.png)
 
 5. Run httpd using qemu:
 
@@ -50,12 +50,12 @@ sudo cp $(which qemu-mipsel-static) .
 
 sudo chroot . ./qemu-mipsel-static ./bin/httpd
 
-![img7](img\img7.png)
+![img7](img/img7.png)
 
 6. Construct the POC as follows and save it as poc.py:
 
-![img8](img\img8.png)
+![img8](img/img8.png)
 
 7. Running POC in another terminal: python3 poc.py triggers a denial of service:
 
-![img9](img\img9.png)
+![img9](img/img9.png)
